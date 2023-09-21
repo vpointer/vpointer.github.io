@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="robots" content="noindex"><meta><title>Tag: I2C - Hololo&#039;s Blog</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="Hololo&#039;s Blog"><meta name="msapplication-TileImage" content="/img/favicon1.ico"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Hololo&#039;s Blog"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta property="og:type" content="blog"><meta property="og:title" content="Hololo&#039;s Blog"><meta property="og:url" content="https://yinzhengyi.com/"><meta property="og:site_name" content="Hololo&#039;s Blog"><meta property="og:locale" content="en_US"><meta property="og:image" content="https://yinzhengyi.com/img/og_image.png"><meta property="article:author" content="Yin Zhengyi"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="https://yinzhengyi.com/img/og_image.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://yinzhengyi.com"},"headline":"Hololo's Blog","image":["https://yinzhengyi.com/img/og_image.png"],"author":{"@type":"Person","name":"Yin Zhengyi"},"publisher":{"@type":"Organization","name":"Hololo's Blog","logo":{"@type":"ImageObject","url":{"text":"Hololo's Blog"}}},"description":""}</script><link rel="icon" href="/img/favicon1.ico"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">Hololo&#039;s Blog</a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item search" title="Search" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><div class="card-content"><nav class="breadcrumb" aria-label="breadcrumbs"><ul><li><a href="/tags">Tags</a></li><li class="is-active"><a href="#" aria-current="page">I2C</a></li></ul></nav></div></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item">Posted&nbsp;<time dateTime="2023-09-20T17:13:00.000Z" title="2023/9/21 01:13:00">2023-09-21</time></span><span class="level-item"><a class="link-muted" href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%BC%80%E5%8F%91/">嵌入式开发</a></span><span class="level-item">13 minutes read (About 1907 words)</span></div></div><h1 class="title is-3 is-size-4-mobile"><a class="link-muted" href="/%E5%8D%95%E7%89%87%E6%9C%BA%E9%80%9A%E4%BF%A1%E5%8D%8F%E8%AE%AE%E6%95%B4%E7%90%86/">单片机通信协议整理</a></h1><div class="content"><h1 id="串口通信"><a href="#串口通信" class="headerlink" title="串口通信"></a>串口通信</h1><p>串口通信算得上是单片机中最常用、最基础的一种通讯方式。常用可作为一种调试的手段，与单片机通讯监控数据、发送指令，也可以用作两个单片机之间互相通讯使用。串口通讯的物理层是 RS-232 与 TTL 标准。</p>
+<h2 id="协议层"><a href="#协议层" class="headerlink" title="协议层"></a>协议层</h2><h3 id="并行和串行"><a href="#并行和串行" class="headerlink" title="并行和串行"></a>并行和串行</h3><ul>
+<li><strong>并行通信</strong>：各个数据位同时传输，速度快但占用引脚资源多。</li>
+<li><strong>串行通信</strong>：数据按位顺序传输，占用引脚资源少但速度相对慢。</li>
+</ul>
+<h3 id="单工、半双工和全双工"><a href="#单工、半双工和全双工" class="headerlink" title="单工、半双工和全双工"></a>单工、半双工和全双工</h3><ul>
+<li><strong>单工</strong>：数据只在一个方向上进行传输。</li>
+<li><strong>半双工</strong>：允许数据在两个方向上传输，但是同一时刻，只允许数据在一个方向上传输，相当于方向可切换的单工通信。</li>
+<li><strong>全双工</strong>：允许数据同时在两个方向上传输，因此，全双工通信是两个单工通信方式的结合，要求发送和接收设备都有独立的接发能力。</li>
+</ul>
+<h3 id="同步和异步"><a href="#同步和异步" class="headerlink" title="同步和异步"></a>同步和异步</h3><ul>
+<li><strong>同步通信</strong>：带时钟同步信号传输。例如 SPI，IIC 等通信接口。</li>
+<li><strong>异步通信</strong>：不带时钟同步信号。例如 UART，单总线。</li>
+</ul>
+<h3 id="USART-和-UART"><a href="#USART-和-UART" class="headerlink" title="USART 和 UART"></a>USART 和 UART</h3><ul>
+<li><strong>UART</strong>：通用异步收发器（Universal Asynchronous Receiver&#x2F;Transmitter）</li>
+<li><strong>USART</strong>：通用同步异步收发器（Universal Synchronous&#x2F;Asynchronous Receiver&#x2F;Transmitter）</li>
+</ul>
+<p><img src="https://i.imgur.com/KZTEBKw.png"></p>
+<p><img src="https://i.imgur.com/b5ZVNIu.png"></p>
+<p>USART 是 UART 的升级版，区别在于多了 CLK 线，在 CLK 没有信号的时候，就表明没有数据传输任务，有 CLK 信号的时候，就是正在传输信号，并且 CLK 提供了时钟同步功能，效验也更精确。</p>
+<h2 id="物理层"><a href="#物理层" class="headerlink" title="物理层"></a>物理层</h2><h3 id="RS-232-标准"><a href="#RS-232-标准" class="headerlink" title="RS-232 标准"></a>RS-232 标准</h3><p>RS-232 通信的物理层，是两个设备的 DB9 接口之间通过串口信号线建立起连接，串口信号线中使用 RS-232 电平传输数据信号。因为控制器一般使用的是 TTL 电平，所以需要专用的电平转换芯片才能实现通讯。</p>
+<p><img src="https://i.imgur.com/uVIITKN.png"><br>TTL 与 RS-232 电平比较：</p>
+<table>
+<thead>
+<tr>
+<th>通讯标准</th>
+<th>电平标准（发送端）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>5V TTL</td>
+<td>逻辑 <code>0</code>：0~0.5V；逻辑 <code>1</code>：2.4V-5V</td>
+</tr>
+<tr>
+<td>RS-232</td>
+<td>逻辑 <code>0</code>：+3V<del>+15V；逻辑 <code>1</code>：-15V</del>-3V</td>
+</tr>
+</tbody></table>
+<p>理想状态下的对应时序图：</p>
+<p><img src="https://i.imgur.com/ptnlQ6n.png"></p>
+<p>RS-232 协议一般使用 DB9 接口，计算机一般用公头接口（针），调制调解器设备中一般为母头（孔）：</p>
+<p><img src="https://i.imgur.com/a0qECrG.png"><br>接口引脚定义：</p>
+<table>
+<thead>
+<tr>
+<th>引脚符号</th>
+<th>名称</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>DCD</td>
+<td>载波检测</td>
+<td>Data Carrier Detect，数据载波检测，用于 DTE 告知对方，本机是否收到对方的载波信号</td>
+</tr>
+<tr>
+<td>RXD</td>
+<td>接收数据</td>
+<td>Receive Data，数据接收信号，即输入</td>
+</tr>
+<tr>
+<td>TXD</td>
+<td>发送数据</td>
+<td>Transmit Data，数据发送信号，即输出。两个设备之间的 TXD 与 RXD 应交叉相连</td>
+</tr>
+<tr>
+<td>DTR</td>
+<td>数据终端（DTE）就绪</td>
+<td>Data Terminal Ready，数据终端就绪，用于 DTE 向对方告知本机是否已准备好</td>
+</tr>
+<tr>
+<td>GND</td>
+<td>信号地</td>
+<td>地线，两个通讯设备之间的地电位可能不一样，这会影响收发双方的电平信号，所以两个串口设备之间必须要使用地线连接，即共地</td>
+</tr>
+<tr>
+<td>DSR</td>
+<td>数据设备（DCE）就绪</td>
+<td>Data Set Ready，数据发送就绪，用于 DCE 告知对方本机是否处于待命状态</td>
+</tr>
+<tr>
+<td>RTS</td>
+<td>请求发送</td>
+<td>Request To Send，请求发送， DTE 请求 DCE 本设备向 DCE 端发送数据</td>
+</tr>
+<tr>
+<td>CTS</td>
+<td>允许发送</td>
+<td>Clear To Send，允许发送，DCE 回应对方的 RTS 发送请求，告知对方是否可以发送数据</td>
+</tr>
+<tr>
+<td>RI</td>
+<td>响铃指示</td>
+<td>Ring Indicator，响铃指示，表示 DCE 端与线路已接通</td>
+</tr>
+</tbody></table>
+<p>DB9 公头与母头的 TX&#x2F;RX 相反，所以一般对接即可，等效于连接这几条信号线：</p>
+<p><img src="https://i.imgur.com/cBVUSYA.png"></p>
+<p>串口线中的 RTS、CTS、DSR、DTR 及 DCD 信号，使用逻辑 <code>1</code> 表示信号有效，逻辑 <code>0</code> 表示信号无效。</p>
+<p>在实际使用中，有时候只保留 RXD、TXD 与 GND。</p>
+<h1 id="I2C通信"><a href="#I2C通信" class="headerlink" title="I2C通信"></a>I2C通信</h1><p>I2C（Inter-Integrated Circuit）是一种串行通讯总线，可允许存在多主机，但同一时刻只能有一个主机在线。I2C 由两条开漏信号线组成，接线简单，利用电阻上拉，典型电平为正逻辑 3.3V 或 5V。传输速率分快速模式（400Kb&#x2F;s）、标准模式（100Kb&#x2F;s）、低速模式（10Kb&#x2F;s）。</p>
+<p>在 I2C 总线上，从机以它的 I2C 地址被选择。这样子可以用在一个主机上通过两根线控制多个从机。</p>
+<p><img src="https://i.imgur.com/164i47t.png"></p>
+<h2 id="I2C-的引脚"><a href="#I2C-的引脚" class="headerlink" title="I2C 的引脚"></a>I2C 的引脚</h2><ul>
+<li><strong>SCL</strong>（serial clock）：由主机产生的方波，用来控制传输速率和数据的锁存。</li>
+<li><strong>SDA</strong>（serial data）：这是一个 <strong>半双工、同步</strong> 的信号线，传输的数据包括地址、控制信号与通信数据。</li>
+</ul>
+<h2 id="I2C-地址"><a href="#I2C-地址" class="headerlink" title="I2C 地址"></a>I2C 地址</h2><ul>
+<li>I2C 地址划分，是 7 bit 地址加上 1 bit 读写指示。</li>
+<li>I2C 总线上的每个设备都必须有一个唯一的地址，如果地址重复会出问题。有些设备的 I2C 地址是可以编程设置的。</li>
+</ul>
+<p><img src="https://i.imgur.com/t8hRHZF.png"></p>
+<h2 id="I2C-通信"><a href="#I2C-通信" class="headerlink" title="I2C 通信"></a>I2C 通信</h2><ul>
+<li><strong>START</strong>：主机在 SCL 为高时，拉低 SDA 发起。</li>
+<li><strong>STOP</strong>：主机在 SCL 为高时，释放 SDA（变为高电平）发起。</li>
+<li><strong>ACK</strong>（acknowledge）：I2C 传输都是随着每个 SCL 脉冲，每次传输 1 个字节（8 个位）。每次传输的第 9 个脉冲被保留为从机的确认信号，每次的 ACK 信号表示前一次传输成功。</li>
+</ul>
+<h3 id="I2C-传输句段示例"><a href="#I2C-传输句段示例" class="headerlink" title="I2C 传输句段示例"></a>I2C 传输句段示例</h3><p>这一段传输的值为 <code>11001101</code>：</p>
+<p><img src="https://i.imgur.com/I0CJvUb.png"></p>
+<ol>
+<li>主机拉低 SDA 电平以产生 START 信号。</li>
+<li>第一个位被设置，主机拉低 SCL，将时钟信号经过 DAC 进行输出。</li>
+<li>传输到第九个位时，主机不会拉低 SDA，如果从机确认传输完整，则将 SDA 拉低让主机知道。</li>
+</ol>
+<h3 id="有效的数据传输"><a href="#有效的数据传输" class="headerlink" title="有效的数据传输"></a>有效的数据传输</h3><ol>
+<li>在 SCL 保持高电平（传输数据）时，SDA 在这段时间内必须保持稳定才有效。</li>
+<li>在 SCL 节拍间的低电平，才允许 SDA 切换数值。</li>
+<li>当 SCL 为高电平，SDA 发生变化时，就会被解释为 START、RESTART 或 STOP 事件。</li>
+</ol>
+<p><img src="https://i.imgur.com/UdPFaXT.png"></p>
+<h3 id="接口电路上升-x2F-下降计时"><a href="#接口电路上升-x2F-下降计时" class="headerlink" title="接口电路上升 &#x2F; 下降计时"></a>接口电路上升 &#x2F; 下降计时</h3><p><img src="https://i.imgur.com/ag3dGKT.png"></p>
+<p>如图，晶体管将在低电平时导通，并将 $C_b$ 电容放电到低电平。反之，晶体管将在高电平时截止，上拉电阻会将 $C_b$ 充电至高电平。</p>
+<ul>
+<li>$t_r$（上升时间）：信号从低电平过渡到高电平的最大时间。因为 I2C 是开漏信号，所以上升时间由上拉电阻和总线电容的 RC 时间常数决定。</li>
+<li>$t_f$（下降时间）：信号从高电平过渡到低电平的最大时间。</li>
+</ul>
+<p><img src="https://i.imgur.com/LvvcHD0.png"></p>
+</div></article></div></div><div class="column column-left is-4-tablet is-4-desktop is-4-widescreen  order-1"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar is-rounded" src="/img/avatar1.png" alt="Yin Zhengyi"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">Yin Zhengyi</p><p class="is-size-6 is-block">Developer</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>RiZhao, China</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">Posts</p><a href="/archives"><p class="title">7</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">Categories</p><a href="/categories"><p class="title">2</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">Tags</p><a href="/tags"><p class="title">4</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/vpointer" target="_blank" rel="noopener">Follow</a></div><div class="level is-mobile is-multiline"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Email" href="mailto:i@yinzhengyi.com"><i class="fas fa-envelope"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Twitter" href="https://twitter.com/3zHJTCe4LBRaZV0"><i class="fab fa-twitter"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="知乎" href="https://www.zhihu.com/people/zeno-yin"><i class="fab fa-zhihu"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="bilibili" href="https://space.bilibili.com/4684892"><i class="fab fa-bilibili"></i></a></div></div></div><!--!--><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">Categories</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%BC%80%E5%8F%91/"><span class="level-start"><span class="level-item">嵌入式开发</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/%E6%99%BA%E8%83%BD%E7%94%B5%E7%BD%91%E4%BF%A1%E6%81%AF%E5%B7%A5%E7%A8%8B/"><span class="level-start"><span class="level-item">智能电网信息工程</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li></ul></div></div></div><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">Recents</h3><article class="media"><div class="media-content"><p class="date"><time dateTime="2023-09-20T17:13:00.000Z">2023-09-21</time></p><p class="title"><a href="/%E5%8D%95%E7%89%87%E6%9C%BA%E9%80%9A%E4%BF%A1%E5%8D%8F%E8%AE%AE%E6%95%B4%E7%90%86/">单片机通信协议整理</a></p><p class="categories"><a href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%BC%80%E5%8F%91/">嵌入式开发</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2022-11-13T10:42:28.000Z">2022-11-13</time></p><p class="title"><a href="/dai-ma-gao-liang-ce-shi/">代码高亮测试</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-07-08T15:16:00.000Z">2021-07-08</time></p><p class="title"><a href="/zhi-neng-dian-biao-yu-yong-hu-xu-qiu-guan-li/">智能电表与用户需求管理</a></p><p class="categories"><a href="/categories/%E6%99%BA%E8%83%BD%E7%94%B5%E7%BD%91%E4%BF%A1%E6%81%AF%E5%B7%A5%E7%A8%8B/">智能电网信息工程</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-07-05T07:12:00.000Z">2021-07-05</time></p><p class="title"><a href="/zhi-neng-bian-dian-zhan-ji-zhu/">智能变电站技术</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-06-03T04:23:00.000Z">2021-06-03</time></p><p class="title"><a href="/dian-li-wu-lian-wang-fu-xi/">电力物联网复习</a></p><p class="categories"><a href="/categories/%E6%99%BA%E8%83%BD%E7%94%B5%E7%BD%91%E4%BF%A1%E6%81%AF%E5%B7%A5%E7%A8%8B/">智能电网信息工程</a></p></div></article></div></div><div class="card widget" data-type="archives"><div class="card-content"><div class="menu"><h3 class="menu-label">Archives</h3><ul class="menu-list"><li><a class="level is-mobile" href="/archives/2023/09/"><span class="level-start"><span class="level-item">September 2023</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2022/11/"><span class="level-start"><span class="level-item">November 2022</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/07/"><span class="level-start"><span class="level-item">July 2021</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/06/"><span class="level-start"><span class="level-item">June 2021</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2019/10/"><span class="level-start"><span class="level-item">October 2019</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2019/01/"><span class="level-start"><span class="level-item">January 2019</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></div></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">Tags</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/I2C/"><span class="tag">I2C</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1/"><span class="tag">串口通信</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%89%A9%E8%81%94%E7%BD%91/"><span class="tag">物联网</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%BB%A7%E7%94%B5%E4%BF%9D%E6%8A%A4/"><span class="tag">继电保护</span><span class="tag">1</span></a></div></div></div></div></div><div class="card widget" data-type="subscribe-email"><div class="card-content"><div class="menu"><h3 class="menu-label">Subscribe for updates</h3><form action="https://feedburner.google.com/fb/a/mailverify" method="post" target="popupwindow" onsubmit="window.open(&#039;https://feedburner.google.com/fb/a/mailverify?uri=&#039;,&#039;popupwindow&#039;,&#039;scrollbars=yes,width=550,height=520&#039;);return true"><input type="hidden" value="" name="uri"><input type="hidden" name="loc" value="en_US"><div class="field has-addons"><div class="control has-icons-left is-expanded"><input class="input" name="email" type="email" placeholder="Email"><span class="icon is-small is-left"><i class="fas fa-envelope"></i></span></div><div class="control"><input class="button" type="submit" value="Subscribe"></div></div></form></div></div></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/">Hololo&#039;s Blog</a><p class="is-size-7"><span>&copy; 2023 Yin Zhengyi</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("en");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="Back to top" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "This website uses cookies to improve your experience.",
+          dismiss: "Got it!",
+          allow: "Allow cookies",
+          deny: "Decline",
+          link: "Learn more",
+          policy: "Cookie Policy",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="Type something..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"Type something...","untitled":"(Untitled)","posts":"Posts","pages":"Pages","categories":"Categories","tags":"Tags"});
+        });</script></body></html>
